@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karaoke Key</title>
+<meta name="description" content="Karaoke Key is a Chrome extension that shows the musical key and tempo of the song playing on YouTube.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap">
+<style>
+/* Layout: single narrow column — name, one-line pitch, a mock of the on-screen panel, how it works, data credit. */
+:root {
+  --bg: #f3f4f1; --surface: #ffffff; --ink: #18201d; --muted: #5d6963; --line: #d9ded9;
+  --accent: #1f6f5c; --panel: #121715; --panel-ink: #f1f1f1; --mint: #5ee0b8;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121715; --surface: #1a211e; --ink: #e8ece9; --muted: #98a59f; --line: #2c3632; --accent: #5cc4a6; --panel: #0b0f0d; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #121715; --surface: #1a211e; --ink: #e8ece9; --muted: #98a59f; --line: #2c3632; --accent: #5cc4a6; --panel: #0b0f0d; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 16px/1.6 var(--body); }
+main {
+  max-width: 640px; margin: 0 auto; padding-block: 48px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 32px;
+}
+h1 { font: 800 clamp(40px, 9vw, 60px)/1 var(--display); letter-spacing: -0.03em; margin: 0; }
+.lede { font-size: 19px; color: var(--muted); margin: 12px 0 0; max-width: 52ch; }
+.panel {
+  background: var(--panel); color: var(--panel-ink); border-radius: 14px; padding: 16px 18px; width: min(100%, 280px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+}
+.panel .lbl { font: 600 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: #8fd9c2; }
+.panel .song { color: #d7dedb; margin-top: 6px; font-size: 14px; }
+.panel .key { font: 800 48px/1 var(--display); color: var(--mint); }
+.panel .mode { font-weight: 600; margin-left: 6px; }
+.panel .facts { display: flex; gap: 18px; margin-top: 8px; font: 600 13px var(--mono); }
+.panel .facts b { display: block; font-size: 9px; letter-spacing: .1em; color: #8a9893; text-transform: uppercase; }
+.panel .credit { margin-top: 10px; font-size: 11px; color: #8a9893; }
+h2 { font: 700 22px var(--display); margin: 0 0 8px; }
+ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+section p { margin: 0; }
+.credit-box { border-top: 1px solid var(--line); padding-top: 20px; color: var(--muted); }
+a { color: var(--accent); font-weight: 600; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Karaoke Key</h1>
+    <p class="lede">A Chrome extension that shows the key and tempo of the song playing on YouTube, so every singer knows what they're in for.</p>
+  </header>
+
+  <div class="panel" aria-label="Example of the on-screen panel">
+    <div class="lbl">Song key</div>
+    <div class="song">Michael Jackson – Billie Jean</div>
+    <div><span class="key">F♯</span><span class="mode">minor</span></div>
+    <div class="facts"><span><b>Tempo</b>117 BPM</span><span><b>Camelot</b>11A</span></div>
+    <div class="credit">Key data from GetSongBPM</div>
+  </div>
+
+  <section>
+    <h2>How it works</h2>
+    <ol>
+      <li>Play any song on YouTube or YouTube Music.</li>
+      <li>Karaoke Key reads the song name from the video title.</li>
+      <li>A small panel shows the key, major or minor, tempo and Camelot number, and stays visible in fullscreen.</li>
+    </ol>
+  </section>
+
+  <p class="credit-box">Song key and tempo data provided by <a href="https://getsongbpm.com" target="_blank" rel="noopener">GetSongBPM</a>.</p>
+</main>
+</body>
+</html>
